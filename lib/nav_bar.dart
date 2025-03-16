@@ -39,7 +39,7 @@ class _NavBarState extends State<NavBar> {
             activeColor: Colors.white,
             color: Colors.white,
             iconSize: 26,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.all(8),
             duration: const Duration(milliseconds: 500),
             tabBackgroundColor: Colors.grey[800]!,
             tabs: const [

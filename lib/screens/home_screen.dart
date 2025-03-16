@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
+      // padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.grey[900],
         borderRadius: BorderRadius.circular(16),
@@ -128,22 +128,25 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                "$price USD",
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "$price USD",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                change,
-                style: TextStyle(color: Colors.redAccent, fontSize: 12),
-              ),
-            ],
+                Text(
+                  change,
+                  style: TextStyle(color: Colors.redAccent, fontSize: 12),
+                ),
+              ],
+            ),
           ),
         ],
       ),
