@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'login_screen.dart';
+import '../../features/auth/presentation/screens/login_screen.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});

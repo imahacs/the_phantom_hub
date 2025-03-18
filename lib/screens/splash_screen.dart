@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:the_phantom_fx/core/constants/images.dart';
-import 'package:the_phantom_fx/screens/auth/login_screen.dart';
+import 'package:the_phantom_fx/features/auth/presentation/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

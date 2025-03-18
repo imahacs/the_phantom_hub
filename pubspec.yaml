@@ -15,8 +15,10 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   dropdown_button2: ^2.3.9
   flutter_svg: ^2.0.17
-  api_cache_manager: ^1.0.2
-  snippet_coder_utils: ^1.0.9
+  fpdart: ^1.1.0
+  supabase_flutter: ^2.8.4
+  flutter_bloc: ^9.1.0
+
 
 dev_dependencies:
   flutter_test:
