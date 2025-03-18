@@ -2,10 +2,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:the_phantom_fx/core/error/exceptions.dart';
 
 abstract interface class AuthRemoteDataSources {
-  Future<String> signInWithEmailAndPassword(
-      {required String fullName,
-      required String email,
-      required String password});
+  Future<String> signUpWithEmailAndPassword({
+    required String fullName,
+    required String email,
+    required String password,
+    required String userName,
+  });
   Future<String> loginWithEmailAndPassword(
       {required String email, required String password});
 }
@@ -16,16 +18,20 @@ class AuthRemoteDataSourcesImpl implements AuthRemoteDataSources {
   AuthRemoteDataSourcesImpl({required this.supabaseClient});
 
   @override
-  Future<String> signInWithEmailAndPassword({
+  Future<String> signUpWithEmailAndPassword({
     required String fullName,
     required String email,
     required String password,
+    required String userName,
   }) async {
     try {
       final response = await supabaseClient.auth.signUp(
         email: email,
         password: password,
-        data: {'full_name': fullName}, // Country, and account type
+        data: {
+          'full_name': fullName,
+          'username': userName,
+        }, // Country, and account type
       );
       if (response.user == null) {
         throw ServerException('User not created');

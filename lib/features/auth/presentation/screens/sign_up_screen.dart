@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:the_phantom_fx/core/theme/app_palette.dart';
 import 'package:the_phantom_fx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:the_phantom_fx/features/auth/presentation/widgets/auth_button.dart';
 import 'package:the_phantom_fx/features/auth/presentation/widgets/auth_field.dart';
-import 'package:the_phantom_fx/main.dart';
-import 'package:the_phantom_fx/screens/auth/OTP_screen.dart';
 import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -35,21 +32,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  String? _selectedCountry;
-  String? _selectedAccountType;
-
-  final List<String> _countries = [
-    'USA',
-    'Canada',
-    'UK',
-    'Germany',
-    'France',
-    'UAE',
-    'Saudi Arabia'
-  ];
-
-  final List<String> _accountTypes = ['Trader', 'Channel Owner'];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,40 +56,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 40),
-                // DropdownButtonHideUnderline(
-                //   child: DropdownButton2<String>(
-                //     isExpanded: true,
-                //     hint: const Text('Select Account Type',
-                //         style: TextStyle(color: Colors.white)),
-                //     value: _selectedAccountType,
-                //     items: _accountTypes.map((String type) {
-                //       return DropdownMenuItem<String>(
-                //         value: type,
-                //         child: Text(type,
-                //             style: const TextStyle(color: Colors.white)),
-                //       );
-                //     }).toList(),
-                //     onChanged: (String? newValue) {
-                //       setState(() {
-                //         _selectedAccountType = newValue;
-                //       });
-                //     },
-                //     buttonStyleData: ButtonStyleData(
-                //       padding: const EdgeInsets.symmetric(horizontal: 16),
-                //       decoration: BoxDecoration(
-                //         color: Colors.grey[900],
-                //         borderRadius: BorderRadius.circular(8),
-                //       ),
-                //     ),
-                //     dropdownStyleData: DropdownStyleData(
-                //       decoration: BoxDecoration(
-                //         color: Colors.black,
-                //         borderRadius: BorderRadius.circular(8),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(height: 16),
                 AuthField(
                     label: 'Full Name',
                     hintText: 'Enter your full name',
@@ -128,41 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hintText: 'Enter your password',
                     controller: passwordController,
                     isObscureText: true),
-                // const SizedBox(height: 16),
-                // DropdownButtonHideUnderline(
-                //   child: DropdownButton2<String>(
-                //     isExpanded: true,
-                //     hint: const Text('Select Country',
-                //         style: TextStyle(color: Colors.white)),
-                //     value: _selectedCountry,
-                //     items: _countries.map((String country) {
-                //       return DropdownMenuItem<String>(
-                //         value: country,
-                //         child: Text(country,
-                //             style: const TextStyle(color: Colors.white)),
-                //       );
-                //     }).toList(),
-                //     onChanged: (String? newValue) {
-                //       setState(() {
-                //         _selectedCountry = newValue;
-                //       });
-                //     },
-                //     buttonStyleData: ButtonStyleData(
-                //       padding: const EdgeInsets.symmetric(horizontal: 16),
-                //       decoration: BoxDecoration(
-                //         color: Colors.grey[900],
-                //         borderRadius: BorderRadius.circular(8),
-                //       ),
-                //     ),
-                //     dropdownStyleData: DropdownStyleData(
-                //       decoration: BoxDecoration(
-                //         color: Colors.black,
-                //         borderRadius: BorderRadius.circular(8),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(height: 20),
+
                 const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
@@ -170,58 +84,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     buttonText: 'Sign Up',
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                          context.read<AuthBloc>().add(
-                                AuthSignUp(
-                                  fullName: fullNameController.text.trim(),
-                                  email: emailController.text.trim(),
-                                  password: passwordController.text.trim(),
-                                ),
-                              );
+                        context.read<AuthBloc>().add(
+                              AuthSignUp(
+                                fullName: fullNameController.text.trim(),
+                                email: emailController.text.trim(),
+                                password: passwordController.text.trim(),
+                                userName: userName.text.trim(),
+                              ),
+                            );
                       }
                     },
-                    // onPressed: () {
-                    //   if (_selectedAccountType == null) {
-                    //     ScaffoldMessenger.of(context).showSnackBar(
-                    //       const SnackBar(
-                    //         content: Text('Please select an account type.'),
-                    //         backgroundColor: Colors.red,
-                    //       ),
-                    //     );
-                    //     return;
-                    //   }
-
-                    //   Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => const OtpScreen()),
-                    //   );
-                    // },
                   ),
-                  // child: ElevatedButton(
-                  //   onPressed: () {
-                  //     if (_selectedAccountType == null) {
-                  //       ScaffoldMessenger.of(context).showSnackBar(
-                  //         const SnackBar(
-                  //           content: Text("Please select an account type."),
-                  //           backgroundColor: Colors.red,
-                  //         ),
-                  //       );
-                  //       return;
-                  //     }
-
-                  //     Navigator.pushReplacement(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) => const OtpScreen()),
-                  //     );
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //     backgroundColor: Colors.white,
-                  //     foregroundColor: Colors.black,
-                  //     padding: const EdgeInsets.symmetric(vertical: 12),
-                  //   ),
-                  //   child: const Text('Sign Up'),
-                  // ),
                 ),
                 const SizedBox(height: 10),
                 GestureDetector(
