@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:the_phantom_fx/core/theme/app_palette.dart';
 import 'package:the_phantom_fx/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:the_phantom_fx/features/auth/presentation/widgets/auth_button.dart';
+import 'package:the_phantom_fx/features/auth/presentation/widgets/auth_dropdown.dart';
 import 'package:the_phantom_fx/features/auth/presentation/widgets/auth_field.dart';
 import 'login_screen.dart';
 
@@ -22,6 +23,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController userName = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  String? selectedCountry;
+  String? selectedAccountType;
+
+  final List<String> countries = ['USA', 'UK', 'UAE', 'Saudi Arabia'];
+  final List<String> accountTypes = ['Trader', 'Channel Owner'];
 
   @override
   void dispose() {
@@ -61,6 +68,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hintText: 'Enter your full name',
                     controller: fullNameController),
                 const SizedBox(height: 16),
+                AuthDropdown(
+                  label: "Country",
+                  hintText: "Select Country",
+                  value: selectedCountry,
+                  items: countries,
+                  onChanged: (value) => setState(() => selectedCountry = value),
+                ),
+                const SizedBox(height: 16),
+                AuthDropdown(
+                  label: "Account Type",
+                  hintText: "Select Account Type",
+                  value: selectedAccountType,
+                  items: ["Trader", "Channel Owner"],
+                  onChanged: (value) =>
+                      setState(() => selectedAccountType = value),
+                ),
+                const SizedBox(height: 16),
                 AuthField(
                     label: 'Username',
                     hintText: 'Enter your username',
@@ -76,7 +100,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hintText: 'Enter your password',
                     controller: passwordController,
                     isObscureText: true),
-
                 const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
@@ -90,6 +113,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 email: emailController.text.trim(),
                                 password: passwordController.text.trim(),
                                 userName: userName.text.trim(),
+                                country: selectedCountry!,
+                                accountType: selectedAccountType!,
                               ),
                             );
                       }

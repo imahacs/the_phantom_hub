@@ -7,6 +7,8 @@ abstract interface class AuthRemoteDataSources {
     required String email,
     required String password,
     required String userName,
+    required String country,
+    required String accountType,
   });
   Future<String> loginWithEmailAndPassword(
       {required String email, required String password});
@@ -23,6 +25,8 @@ class AuthRemoteDataSourcesImpl implements AuthRemoteDataSources {
     required String email,
     required String password,
     required String userName,
+    required String country,
+    required String accountType,
   }) async {
     try {
       final response = await supabaseClient.auth.signUp(
@@ -31,7 +35,9 @@ class AuthRemoteDataSourcesImpl implements AuthRemoteDataSources {
         data: {
           'full_name': fullName,
           'username': userName,
-        }, // Country, and account type
+          'country': country,
+          'account_type': accountType,
+        }, 
       );
       if (response.user == null) {
         throw ServerException('User not created');

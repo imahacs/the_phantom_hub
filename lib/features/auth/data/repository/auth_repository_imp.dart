@@ -22,6 +22,8 @@ class AuthRepositoryImp implements AuthRepository {
     required String email,
     required String password,
     required String userName,
+    required String country,
+    required String accountType,
   }) async {
     try {
       final userId = await remoteDataSources.signUpWithEmailAndPassword(
@@ -29,10 +31,12 @@ class AuthRepositoryImp implements AuthRepository {
         email: email,
         password: password,
         userName: userName,
+        country: country,
+        accountType: accountType,
       );
       return Right(userId);
     } on ServerException catch (e) {
       return Left(Failure());
     }
   }
-}
+  }
