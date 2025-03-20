@@ -1,8 +1,9 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:the_phantom_fx/core/error/exceptions.dart';
+import 'package:the_phantom_fx/features/auth/data/models/profile_model.dart';
 
 abstract interface class AuthRemoteDataSources {
-  Future<String> signUpWithEmailAndPassword({
+  Future<UserModel> signUpWithEmailAndPassword({
     required String fullName,
     required String email,
     required String password,
@@ -10,8 +11,8 @@ abstract interface class AuthRemoteDataSources {
     required String country,
     required String accountType,
   });
-  Future<String> loginWithEmailAndPassword(
-      {required String email, required String password});
+  Future<UserModel> loginWithEmailAndPassword(
+      {required String email, required String password}) ;
 }
 
 class AuthRemoteDataSourcesImpl implements AuthRemoteDataSources {
@@ -20,7 +21,7 @@ class AuthRemoteDataSourcesImpl implements AuthRemoteDataSources {
   AuthRemoteDataSourcesImpl({required this.supabaseClient});
 
   @override
-  Future<String> signUpWithEmailAndPassword({
+  Future<UserModel> signUpWithEmailAndPassword({
     required String fullName,
     required String email,
     required String password,
@@ -37,22 +38,33 @@ class AuthRemoteDataSourcesImpl implements AuthRemoteDataSources {
           'username': userName,
           'country': country,
           'account_type': accountType,
-        }, 
+        },
       );
       if (response.user == null) {
         throw ServerException('User not created');
       }
-      return response.user!.id;
+      return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<String> loginWithEmailAndPassword({
+  Future<UserModel> loginWithEmailAndPassword({
     required String email,
     required String password,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    try {
+      final response = await supabaseClient.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      if (response.user == null) {
+        throw ServerException('User not created');
+      }
+      return UserModel.fromJson(response.user!.toJson());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 }

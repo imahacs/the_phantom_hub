@@ -1,13 +1,14 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:the_phantom_fx/core/error/failuers.dart';
 import 'package:the_phantom_fx/core/usecase/usecase.dart';
+import 'package:the_phantom_fx/features/auth/domain/entities/profile.dart';
 import 'package:the_phantom_fx/features/auth/domain/repository/auth_repository.dart';
 
-class UserSignUp implements UseCase<String, UserSignUpParams> {
+class UserSignUp implements UseCase<Profile, UserSignUpParams> {
   final AuthRepository authRepository;
   const UserSignUp(this.authRepository);
   @override
-  Future<Either<Failure, String>> call(UserSignUpParams params) async {
+  Future<Either<Failure, Profile>> call(UserSignUpParams params) async {
     return await authRepository.signUpWithEmailAndPassword(
       fullName: params.fullName,
       email: params.email,
