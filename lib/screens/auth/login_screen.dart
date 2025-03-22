@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:the_phantom_fx/nav_bar.dart';
+import 'package:the_phantom_fx/core/widgets/nav_bar.dart';
 
 import 'forgot_password_screen.dart';
 import 'sign_up_screen.dart';
